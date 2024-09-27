@@ -36,8 +36,8 @@ public class Romain {
 	}
 	
 	public static void main(String[] args) {
-		Romain cesar = new Romain("César", 6);
-		System.out.println(cesar);
-		cesar.recevoirCoup(4);
+//		Romain cesar = new Romain("César", 6);
+//		System.out.println(cesar);
+//		cesar.recevoirCoup(4);
 	}
 }
