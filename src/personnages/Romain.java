@@ -18,7 +18,7 @@ public class Romain {
 	}
 	
 	public void parler(String texte) {
-		System.out.println(prendreParole() + "«" + texte + "»");
+		System.out.println(prendreParole() + "ï¿½" + texte + "ï¿½");
 	}
 	
 	private String prendreParole() {
@@ -35,30 +35,44 @@ public class Romain {
 		int forceOrig = force;
 		force -= forceCoup;
 		if (force > 0) {
-			parler("Aïe");
+			parler("Aï¿½e !!!");
 		} else {
 			parler("J'abandonne...");
 		}
 		assert force<forceOrig;
 	}
 	
-//	private void sEquiper(Equipement equipement) {
-//		switch (nbEquipements) {
-//			case 2:
-//				System.out.println("Le soldat " + nom + " est déjà bien protégé !");
-//				break;
-//			case 1:
-//				if (equipements[nbEquipements-1] == equipement) {
-//					System.out.println("Le soldat " + nom + " possède déjà un " + equipement +" !");
-//				} else {
-//					equipements[nbEquipements] = equipement;
-//				}
-//		}
-//
-//	}
+	private void sEquiper(Equipement equipement) {
+		switch (nbEquipements) {
+			case 2:
+				System.out.println("Le soldat " + nom + " est dÃ©jÃ  bien protÃ©gÃ© !");
+				break;
+			case 1:
+				if (equipements[nbEquipements-1] == equipement) {
+					System.out.println("Le soldat " + nom + " possÃ¨de dÃ©jÃ  un " + equipement +" !");
+					break;
+				} else {
+					equipements[nbEquipements] = equipement;
+					nbEquipements += 1; 
+					System.out.println("Le soldat " + nom + " s'Ã©quipe avec un " + equipement + ".");
+					break;
+				}
+			default:
+				nbEquipements += 1;
+				equipements[0] = equipement;
+				System.out.println("Le soldat " + nom + " s'Ã©quipe avec un " + equipement + ".");
+				break;
+		}
+
+	}
 	
 	public static void main(String[] args) {
 		Romain minus = new Romain("Minus", 6);
 		minus.recevoirCoup(4);
+		minus.sEquiper(Equipement.BOUCLIER);
+		minus.sEquiper(Equipement.BOUCLIER);
+		minus.sEquiper(Equipement.CASQUE);
+		minus.sEquiper(Equipement.CASQUE);
+
 	}
 }
