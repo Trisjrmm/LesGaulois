@@ -1,5 +1,7 @@
 package personnages;
 
+import villagegaulois.Musee;
+
 public class Gaulois {
 	private String nom;
 	private int force; 
@@ -18,48 +20,53 @@ public class Gaulois {
 	}
 
 	public void parler(String texte) {
-		System.out.println(prendreParole() + "�" + texte + "�");
+		System.out.println(prendreParole() + texte);
 	}
 
-//	private String prendreParole() {
-//		return "Le gaulois " + nom + " : ";
-//	}
-	
 	private String prendreParole() {
 		return "Le gaulois " + nom + " : ";
 	}
 
-
-//	public void frapper(Romain romain) {
-//		parler(nom + " envoie un grand coup dans la machoire  de " + romain.getNom());
-//		romain.recevoirCoup((force / 3) * effetPotion);
-//	}
-
 	public void frapper(Romain romain) {
-		System.out.println(nom + " envoie un grand coup dans la mâchoire de " + romain.getNom());
-		Equipement newTrophees[] = romain.recevoirCoup((force / 3) * effetPotion);
-		for (int i = 0; trophees != null && i < trophees.length; i++, nbTrophees++) {
-			this.trophees[nbTrophees] = newTrophees[i];
-		}
+	    System.out.println(nom + " envoie un grand coup dans la mâchoire de " + romain.getNom() + ".");
+	    Equipement[] newTrophees = romain.recevoirCoup((force / 3) * effetPotion);
+	    
+	    if (newTrophees != null) {
+	    	int i = 0;
+	    	while (i < newTrophees.length && newTrophees[i] != null && nbTrophees < trophees.length) {
+	            this.trophees[nbTrophees] = newTrophees[i];
+	            nbTrophees++;
+	            i++;
+	        }
+	    }
 	}
-	
 	
 	public void boirePotion(int forcePotion) {
 		effetPotion = forcePotion;
-		parler("Merci Druide, je sens que ma force est " + effetPotion + " fois d�cupl�e. ");
+		parler("Merci Druide, je sens que ma force est " + effetPotion + " fois décuplée. ");
 	}
 
 	@Override
 	public String toString() {
 		return "Gaulois [nom=" + nom + ", force=" + force + ", effetPotion=" + effetPotion + "]";
 	}
-
-	public static void main(String[] args) {
-		Gaulois asterix = new Gaulois("Ast�rix", 8);
-		System.out.println(asterix);
-		asterix.parler("Bonjour!!");
-		asterix.boirePotion(5);
-		Romain cesar = new Romain("C�sar", 6);
-		asterix.frapper(cesar);
+	
+	public void faireUneDonnation(Musee musee) {
+		if (nbTrophees > 0) {
+			parler("Je donne au musee tous mes trophees : ");
+			for (int i = 0; i < nbTrophees; i++) {
+				musee.donnerTrophee(this, trophees[i]);;
+				System.out.println("- " + trophees[i]);
+			}
+		}
 	}
+
+//	public static void main(String[] args) {
+//		Gaulois asterix = new Gaulois("Astérix", 8);
+//		System.out.println(asterix);
+//		asterix.parler("Bonjour!!");
+//		asterix.boirePotion(5);
+//		Romain cesar = new Romain("César", 6);
+//		asterix.frapper(cesar);
+//	}
 }

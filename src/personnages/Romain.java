@@ -19,8 +19,12 @@ public class Romain {
 		return nom;
 	}
 
+	public int getForce() {
+		return force;
+	}
+	
 	public void parler(String texte) {
-		System.out.println(prendreParole() + "�" + texte + "�");
+		System.out.println(prendreParole() + "�" + texte + "");
 	}
 
 	private String prendreParole() {
@@ -58,6 +62,7 @@ public class Romain {
 					resistanceEquipement += 5;
 				}
 			}
+			
 		}
 		parler(texte + resistanceEquipement + "!");
 		forceCoup -= resistanceEquipement;
@@ -65,9 +70,11 @@ public class Romain {
 	}
 	
 	public Equipement[] recevoirCoup(int forceCoup) {
+		int oldForce = force;		
 		Equipement[] equipementEjecte = null;
 		forceCoup = calculResistanceEquipement(forceCoup);
 		force -= forceCoup;
+		assert force < oldForce;
 		if (force == 0) {
 			parler("Aïe");
 		} else {
@@ -92,7 +99,7 @@ public class Romain {
 	}
 
 	
-	private void sEquiper(Equipement equipement) {
+	public void sEquiper(Equipement equipement) {
 		String soldat = "Le soldat " + nom;
 		
 		switch (nbEquipement) {
@@ -118,13 +125,13 @@ public class Romain {
 
 	}
 
-	public static void main(String[] args) {
-		Romain minus = new Romain("Minus", 6);
-		minus.recevoirCoup(4);
-		minus.sEquiper(Equipement.BOUCLIER);
-		minus.sEquiper(Equipement.BOUCLIER);
-		minus.sEquiper(Equipement.CASQUE);
-		minus.sEquiper(Equipement.CASQUE);
+//	public static void main(String[] args) {
+//		Romain minus = new Romain("Minus", 6);
+//		minus.recevoirCoup(4);
+//		minus.sEquiper(Equipement.BOUCLIER);
+//		minus.sEquiper(Equipement.BOUCLIER);
+//		minus.sEquiper(Equipement.CASQUE);
+//		minus.sEquiper(Equipement.CASQUE);
+//	}
 
-	}
 }
